@@ -1,0 +1,25 @@
+{
+  "name": "dingbot2",
+  "version": "0.0.1",
+  "description": "A checkin service for worker applications",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Tom",
+  "license": "MIT",
+  "dependencies": {
+    "restify": "~2.3.4",
+    "underscore": "~1.4.4",
+    "request": "~2.16.6",
+    "bunyan": "~0.20.0",
+    "commander": "~1.1.1",
+    "moment": "~2.0.0",
+    "mocha": "~1.8.2"
+  },
+  "devDependencies": {
+    "request": "~2.16.6",
+    "expect.js": "~0.2.0"
+  }
+}
