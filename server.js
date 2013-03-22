@@ -31,6 +31,23 @@ var app = module.exports = function(config) {
     return next();
   });
 
+  // get app info
+  server.get('/', function(req, res, next) {
+    // do not allow spaces for appname
+    if (req.params.app.indexOf(' ') > -1) {
+      res.send(500, { error: 'spaces not allowed in app name'});
+      return next();
+    }
+    // find app in array
+    var item = _(apps).findWhere({name: req.params.app});
+    if (!item) { 
+      res.send(404);
+      return next();
+    }
+    res.send(item);
+    return next();
+  });
+
   // Check In Application
   server.post('/:app', function(req, res, next) {
     // do not allow spaces for appname

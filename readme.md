@@ -25,6 +25,19 @@ Error Response 500
 }
 ```
 
+Get App CheckIn Status
+
+### Get /:app
+
+Success Response 200
+
+``` json
+{ 
+  "status": "active", 
+  "checkedIn": "Fri Mar 22 2013 11:19:14 GMT-0400 (EDT)"
+}
+```
+
 Get Apps CheckIn Status
 
 ### GET /
