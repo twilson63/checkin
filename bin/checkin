@@ -3,6 +3,7 @@
 var commander = require('commander');
 var package = require('../package.json');
 var fs = require('fs');
+var init = false;
 
 commander
   .version(package.version)
@@ -22,17 +23,13 @@ commander.parse(process.argv);
 
 if (init) {
   var config = { expire: (60 * 60) * 72, auth: {}};
-  commander.prompt('namespace: ', namespace);
-  function namespace(namespace) {
-    config.namespace = namespace;
-    commander.prompt('username: ', username);
+  commander.prompt('alertUrl: ', alertUrl);
+  function alertUrl(alertUrl) {
+    config.alertUrl = alertUrl;
+    commander.prompt('resolvedUrl: ', resolvedUrl);
   };
-  function username(username) {
-    config.auth.username = username;
-    commander.password('password: ', password);
-  };
-  function password(password) {
-    config.auth.password = password;
+  function resolvedUrl(resolvedUrl) {
+    config.resolvedUrl = resolvedUrl;
     done();
   };
   function done() {

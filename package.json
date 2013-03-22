@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A checkin service for worker applications",
   "main": "server.js",
+  "bin": "./bin/checkin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
