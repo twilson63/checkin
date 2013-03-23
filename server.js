@@ -112,10 +112,9 @@ var app = module.exports = function(config) {
   setInterval(function(){
     //console.log('checking for straglers...')
     var checkpoint = moment().subtract('minutes', 15);
-    console.log('checking');
     _(apps).each(function(item) {
       if(checkpoint.isAfter(item.update) && item.status === 'active') {
-          app.status = 'down';
+          item.status = 'down';
           if (config.notifySvr) {
             request.post(config.notifySvr + '/publish/' + item.name, {json: {
               title: item.name + ' - DOWN!',
