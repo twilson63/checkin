@@ -115,8 +115,8 @@ var app = module.exports = function(config) {
     console.log('checking');
     _(apps).each(function(item) {
       if(checkpoint.isAfter(item.update) && item.status === 'active') {
-          app.state = 'down';
-          if (config.alertUrl) {
+          app.status = 'down';
+          if (config.notifySvr) {
             request.post(config.notifySvr + '/publish/' + item.name, {json: {
               title: item.name + ' - DOWN!',
               msg: item.name + 'has not reported in the last 15 minutes.'
