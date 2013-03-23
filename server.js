@@ -118,7 +118,7 @@ var app = module.exports = function(config) {
           app.state = 'down';
           if (config.alertUrl) {
             request.post(config.notifySvr + '/publish/' + item.name, {json: {
-              title: item.name ' - DOWN!',
+              title: item.name + ' - DOWN!',
               msg: item.name + 'has not reported in the last 15 minutes.'
             }}, function(e, r, b) {
               console.log('notfied alert url');
