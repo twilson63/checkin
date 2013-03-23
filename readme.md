@@ -2,7 +2,32 @@
 
 An application check-in service.  This service allows your applications to periodically checkin and tell `Checkin` that the are still alive and doing well.
 
-# API
+## Install
+
+``` sh
+npm install checkin
+```
+
+## Setup
+
+Create a config.json file that contains the following configuration details:
+
+* expire - Amount of time in milliseconds that you want to give until you notify app is down.
+* port - the port you want the server to start on
+* notifySvr - the url of the notify service (https://github.com/twilson63/notify)
+
+``` sh
+checkin init
+# answer all the questions
+```
+
+## Run
+
+``` sh
+checkin -C ./config.json
+```
+
+## API
 
 Checkin
 

@@ -23,17 +23,24 @@ commander.parse(process.argv);
 
 if (init) {
   var config = { expire: (60 * 60) * 72, auth: {}};
-  commander.prompt('alertUrl: ', alertUrl);
-  function alertUrl(alertUrl) {
-    config.alertUrl = alertUrl;
-    commander.prompt('resolvedUrl: ', resolvedUrl);
+  commander.prompt('port: ', port);
+  function port(port) {
+    config.port = port;
+    commander.prompt('notifySvr: ', notifySvr);
   };
-  function resolvedUrl(resolvedUrl) {
-    config.resolvedUrl = resolvedUrl;
+  function notifySvr(notifySvr) {
+    config.notifySvr = notifySvr;
+    commander.prompt('expire (milliseconds): ', expire);
+  };
+  function expire(expire) {
+    config.expire = expire;
     done();
   };
   function done() {
     fs.writeFileSync('./config.json', JSON.stringify(config));
+    console.log('config.json is created');
+    console.log('checkin -C ./config.json');
+    process.exit(0);
   };
 } else {
   var config;

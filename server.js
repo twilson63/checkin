@@ -1,4 +1,18 @@
 // # CheckIn
+//
+// Welcome to the checkin app
+//
+// this app provides a simple way for workers
+// and other applications to checkin periodically
+// if for some reason the application does not checkin
+// within the time alotted in the config expire node,
+// usually 15 min, then a post is made to a notify
+// service which will let any subscriber know the
+// application has not checked in and is most likely is down.
+//
+// when an application resumes, then another message is 
+// sent to a notify service letting the subscribers know
+// that it is back up.
 var EVERY_5_MINUTES = 1000 * 60 * 5;
 
 var restify = require('restify');
@@ -64,7 +78,11 @@ var app = module.exports = function(config) {
     // notify allclear url
     if (item.status && item.status === 'down') {
       // notify allclear app is back up and running....
-      request.post(config.resolvedUrl, { json: item }, function(e,r,b){
+      request.post(config.notifySvr + '/publish/' + item.name, { json: 
+        {
+          title: item.name + ' has resumed checking in',
+          msg: req.params
+        }}, function(e,r,b){
         console.log('resolved app ' + item.name);
       });
     }
@@ -99,7 +117,10 @@ var app = module.exports = function(config) {
       if(checkpoint.isAfter(item.update) && item.status === 'active') {
           app.state = 'down';
           if (config.alertUrl) {
-            request.post(config.alertUrl, {json: item}, function(e, r, b) {
+            request.post(config.notifySvr + '/publish/' + item.name, {json: {
+              title: item.name ' - DOWN!',
+              msg: item.name + 'has not reported in the last 15 minutes.'
+            }}, function(e, r, b) {
               console.log('notfied alert url');
             });
           }
@@ -115,8 +136,7 @@ if (!module.parent) {
   app({ 
     port: 3000, 
     expire: 60, 
-    alertUrl: 'http://localhost:8000/alert',
-    resolvedUrl: 'http://localhost:8000/allclear'
+    notifySvr: 'http://localhost:8001'
   });
 }
 
