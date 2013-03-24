@@ -40,8 +40,8 @@ var app = module.exports = function(config) {
 
   // List Apps in json
   server.get('/', function(req, res, next) {
-    var results = _(apps).where({status: 'active'});
-    res.send(results);
+    //var results = _(apps).where({status: 'active'});
+    res.send(apps);
     return next();
   });
 

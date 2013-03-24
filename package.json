@@ -1,6 +1,6 @@
 {
-  "name": "dingbot2",
-  "version": "0.1.0",
+  "name": "checkin",
+  "version": "0.1.1",
   "description": "A checkin service for worker applications",
   "main": "server.js",
   "bin": "./bin/checkin",
